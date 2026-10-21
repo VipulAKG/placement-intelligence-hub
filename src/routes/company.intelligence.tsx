@@ -45,7 +45,7 @@ function renderValue(key: string, v?: string) {
     );
   }
   if (v.length > 140 && !v.includes(";")) return <p className="leading-relaxed">{v}</p>;
-  if (v.includes(";") || (v.includes(",") && v.length < 120 && v.split(",").every((p) => p.trim().length < 40))) {
+  if (v.includes(";") || (v.split(",").length >= 3 && !/\d,\d/.test(v) && v.length < 120 && v.split(",").every((p) => p.trim().length < 40))) {
     const items = v.includes(";") ? splitItems(v) : v.split(",").map((s) => s.trim()).filter(Boolean);
     if (items.length > 1) {
       return (
