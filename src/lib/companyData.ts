@@ -43,8 +43,9 @@ export const asString = (v: unknown): string => {
   return String(v).trim();
 };
 
-export const asRecord = (v: unknown): Record<string, unknown> =>
-  v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : {};
+export const asRecord = (v: unknown): Record<string, any> => // eslint-disable-line @typescript-eslint/no-explicit-any
+ 
+  v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, any>) : {};
 
 export const splitItems = (v: string): string[] =>
   v
