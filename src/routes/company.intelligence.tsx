@@ -36,7 +36,7 @@ function renderValue(key: string, v?: string) {
   }
   const rating = v.match(/^(\d(?:\.\d)?)\s*\/\s*5$/);
   if (rating) {
-    const n = parseFloat(rating[1]);
+    const n = parseFloat(rating[1] ?? "0");
     return (
       <span className="inline-flex items-center gap-1.5">
         {Array.from({ length: 5 }).map((_, i) => <Star key={i} className={`h-4 w-4 ${i < Math.round(n) ? "fill-regular text-regular" : "text-border"}`} />)}
@@ -58,7 +58,7 @@ function renderValue(key: string, v?: string) {
   return <span>{v}</span>;
 }
 
-const FieldRow = ({ label, k, value }: { label: string; k: string; value?: string }) => (
+const FieldRow = ({ label, k, value }: { label: string; k: string; value?: string | undefined }) => (
   <div className="flex flex-col gap-1 border-b py-3 last:border-0 sm:flex-row sm:gap-4">
     <dt className="text-sm text-muted-foreground sm:w-1/3">{label}</dt>
     <dd className="text-sm sm:w-2/3">{renderValue(k, value)}</dd>
