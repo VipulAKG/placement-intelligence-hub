@@ -95,7 +95,7 @@ function CompanyIntelligence() {
       (entries) => {
         if (isScrollingRef.current) return;
         const vis = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-        if (vis) setActive(Number((vis.target as HTMLElement).dataset.idx));
+        if (vis) setActive(Number((vis.target as HTMLElement).dataset["idx"]));
       },
       { rootMargin: "-130px 0px -60% 0px" },
     );
@@ -117,7 +117,7 @@ function CompanyIntelligence() {
   }, []);
 
   if (!profile) return null;
-  const linkedin = profile.fields.linkedin_url;
+  const linkedin = profile.fields["linkedin_url"];
 
   return (
     <div>

@@ -12,7 +12,7 @@ describe("company data", () => {
     expect([8, 6, 4, 3].map(scoreToDifficulty)).toEqual(["EXPERT", "ADVANCED", "PRO", "BEGINNER"]);
   });
   it("seed renders 12 skills with 10 levels and 22 sections", () => {
-    const c = SEED_COMPANIES[0];
+    const c = SEED_COMPANIES[0]!;
     const skills = normalizeDashboardSkills(c.skill_levels);
     expect(skills).toHaveLength(12);
     expect(skills.every((s) => s.topics.length === 10)).toBe(true);
