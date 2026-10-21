@@ -15,3 +15,11 @@ describe("App routing", () => {
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
   });
 });
+
+describe("company routes", () => {
+  it("matches /company/intelligence and /company/skills", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    expect(router.matchRoutes("/company/intelligence").at(-1)?.routeId).toBe("/company/intelligence");
+    expect(router.matchRoutes("/company/skills").at(-1)?.routeId).toBe("/company/skills");
+  });
+});
