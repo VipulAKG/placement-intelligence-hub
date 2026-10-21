@@ -86,24 +86,24 @@ export function normalizeCompanySummary(short_json: unknown, companyId = 0): Com
   const r = asRecord(short_json);
   return {
     companyId,
-    name: asString(r.name),
-    shortName: asString(r.short_name) || asString(r.name),
-    logoUrl: asString(r.logo_url),
-    category: asString(r.category),
-    companyType: toType(asString(r.company_type)),
-    incorporationYear: asString(r.incorporation_year),
-    employeeSize: asString(r.employee_size),
-    headquarters: asString(r.headquarters_address),
-    operatingCountries: asString(r.operating_countries),
-    officeLocations: asString(r.office_locations),
-    yoyGrowthRate: asString(r.yoy_growth_rate),
-    websiteUrl: asString(r.website_url),
+    name: asString(r["name"]),
+    shortName: asString(r["short_name"]) || asString(r["name"]),
+    logoUrl: asString(r["logo_url"]),
+    category: asString(r["category"]),
+    companyType: toType(asString(r["company_type"])),
+    incorporationYear: asString(r["incorporation_year"]),
+    employeeSize: asString(r["employee_size"]),
+    headquarters: asString(r["headquarters_address"]),
+    operatingCountries: asString(r["operating_countries"]),
+    officeLocations: asString(r["office_locations"]),
+    yoyGrowthRate: asString(r["yoy_growth_rate"]),
+    websiteUrl: asString(r["website_url"]),
   };
 }
 
 export function normalizeCompanyProfile(full_json: unknown, short_json: unknown, companyId = 0): CompanyProfile {
   const full = asRecord(full_json);
-  const summary = normalizeCompanySummary({ ...asRecord(short_json), ...full, logo_url: asRecord(short_json).logo_url ?? full.logo_url, company_type: asRecord(short_json).company_type ?? full.company_type }, companyId);
+  const summary = normalizeCompanySummary({ ...asRecord(short_json), ...full, logo_url: asRecord(short_json)["logo_url"] ?? full["logo_url"], company_type: asRecord(short_json)["company_type"] ?? full["company_type"] }, companyId);
   const fields: Record<string, string> = {};
   for (const [k, v] of Object.entries({ ...asRecord(short_json), ...full })) {
     if (!BLOCKED.test(k)) fields[k] = asString(v);
@@ -115,14 +115,14 @@ export function normalizeDashboardSkills(skillLevels: unknown[]): DashboardSkill
   return (skillLevels ?? [])
     .map((raw) => {
       const r = asRecord(raw);
-      const id = Number(r.skill_set_id);
-      const level = Number(r.required_level) || 0;
+      const id = Number(r["skill_set_id"]);
+      const level = Number(r["required_level"]) || 0;
       const topics = (SKILL_TOPICS[id] ?? []).map((topic, i) => ({ level_number: i + 1, topic }));
       return {
         id,
-        name: asString(r.skill_set_name),
+        name: asString(r["skill_set_name"]),
         level,
-        proficiency: asString(r.required_proficiency),
+        proficiency: asString(r["required_proficiency"]),
         difficulty: scoreToDifficulty(level),
         bloom: proficiencyToBloom(level),
         criticality: scoreToCriticality(level),
