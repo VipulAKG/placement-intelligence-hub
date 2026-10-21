@@ -1,29 +1,10 @@
-# Welcome to your Lovable project
+# JSS University Companies Research & Placement Analytics Portal
 
-This project was built with [Lovable](https://lovable.dev).
+(a.k.a. JSS University Placement Intelligence Hub) — COLLEGE_NAME used: **JSS University** (short tag **JSS**).
 
-## Build with Lovable
-
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+- **Phase 1 is UI-only.** All data comes from `src/data/seedCompanies.ts` (Accenture reference record) and `src/data/skillTopics.ts`. No database, no backend.
+- **Fully public.** There is no login, auth, or protected route. Every page is reachable directly.
+- Selected company is persisted in `localStorage["selected-company"]` and restored on reload.
+- **Phase 2** will swap the seed for database rows. Normalizers in `src/lib/companyData.ts` already accept the raw `short_json`, `full_json` and `skill_levels` shapes, so only the data source changes.
+- Optional env: `VITE_LOGO_DEV_PUBLISHABLE_KEY` (Logo.dev). Falls back to seed `logo_url`, then an initial letter.
+- Routing uses TanStack Router (file routes): `/`, `/company` → `/company/intelligence`, `/company/skills`.
